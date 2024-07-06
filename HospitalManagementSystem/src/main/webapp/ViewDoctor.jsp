@@ -8,6 +8,12 @@
 <title>View Doctor</title>
 </head>
 <body>
+<% 
+	if(session.getAttribute("Admin")==null)
+	{
+		response.sendRedirect("AdminLogin.jsp");
+	}
+	%>
 <%@ include file="AdminDash.html" %>
 	<div class="p-3">
             <div id="view">

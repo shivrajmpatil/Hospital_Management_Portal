@@ -1,9 +1,17 @@
 package org.Hopital.Repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.*;
 import org.Hospital.Model.ReceptionistModel;
 
-public class ReceptionistRepository extends DBConfig{
+public class ReceptionistRepository{
+	
+	DBConfig dbc = DBConfig.getDBConfig();
+	Connection conn = dbc.getConnection();
+	private PreparedStatement stmt;
+	private ResultSet rs;
 
 	List<ReceptionistModel> list = new ArrayList<ReceptionistModel>();
 
@@ -13,7 +21,7 @@ public class ReceptionistRepository extends DBConfig{
 			int Rid= getRid();
 			Rid++;
 			try {
-				  stmt = conn.prepareStatement("insert into Receptionist values(?,?,?,?,?,?)");
+				  stmt = conn.prepareStatement("insert into receptionist values(?,?,?,?,?,?)");
 				  stmt.setInt(1, Rid);
 				  stmt.setString(2, model.getName());
 				  stmt.setString(3, model.getGender());
@@ -36,12 +44,13 @@ public class ReceptionistRepository extends DBConfig{
 		private int getRid()
 		{
 			try {
-				stmt = conn.prepareStatement("select max(Rid) from Receptionist");
+				stmt = conn.prepareStatement("select max(Rid) from receptionist");
 				rs = stmt.executeQuery();
 				if(rs.next())
 				{
-					String S= rs.getString(1);	//max value get in String format ( If column is empty then occur exception
-					return Integer.parseInt(S);	// return max by converting into int
+					synchronized (rs) {
+						return rs.getInt(1);
+					}
 				}
 				
 				else
@@ -49,7 +58,7 @@ public class ReceptionistRepository extends DBConfig{
 			}
 			catch(Exception ex)
 			{
-				//System.out.println("getRid ex ="+ex);
+				System.out.println("getRid ex ="+ex);
 				return 0;
 			}
 		}
@@ -59,7 +68,7 @@ public class ReceptionistRepository extends DBConfig{
 		public boolean isReceptionist(ReceptionistModel model)
 		{
 			try {
-				stmt = conn.prepareStatement("select *from Receptionist where UserName=?");
+				stmt = conn.prepareStatement("select *from receptionist where UserName=?");
 				stmt.setString(1, model.getUsername());
 				rs = stmt.executeQuery();
 				return rs.next();
@@ -75,7 +84,7 @@ public class ReceptionistRepository extends DBConfig{
 		public boolean isReceptionistRemove(int Rid)
 		{
 			try {
-				stmt = conn.prepareStatement("delete from Receptionist where Rid=?");
+				stmt = conn.prepareStatement("delete from receptionist where Rid=?");
 				stmt.setInt(1, Rid);
 				
 				int value = stmt.executeUpdate(); 
@@ -93,7 +102,7 @@ public class ReceptionistRepository extends DBConfig{
 		public int checkUserPass(ReceptionistModel model)
 		{
 			try {
-				stmt = conn.prepareStatement("select Rid from Receptionist where UserName=? and Password=?");
+				stmt = conn.prepareStatement("select Rid from receptionist where UserName=? and Password=?");
 				stmt.setString(1, model.getUsername());
 				stmt.setString(2, model.getPassword());
 				
@@ -120,7 +129,7 @@ public class ReceptionistRepository extends DBConfig{
 		{
 			list.clear();
 			try {
-				stmt = conn.prepareStatement("select *from Receptionist");
+				stmt = conn.prepareStatement("select *from receptionist");
 				rs = stmt.executeQuery();
 				
 				while(rs.next())
@@ -148,7 +157,7 @@ public class ReceptionistRepository extends DBConfig{
 		public boolean updateReceptionist(ReceptionistModel model)
 		{
 			try {
-				stmt = conn.prepareStatement("update Receptionist set Name=?, Gender=?, Contact=?, Username=?, Password=? where Rid=?");
+				stmt = conn.prepareStatement("update receptionist set Name=?, Gender=?, Contact=?, Username=?, Password=? where Rid=?");
 				stmt.setString(1, model.getName());
 				stmt.setString(2, model.getGender());
 				stmt.setString(3, model.getContact());
@@ -171,7 +180,7 @@ public class ReceptionistRepository extends DBConfig{
 		public ReceptionistModel getProfile(int rid)
 		{
 			try {
-				stmt = conn.prepareStatement("select *from Receptionist where rid=?");
+				stmt = conn.prepareStatement("select *from receptionist where Rid=?");
 				stmt.setInt(1, rid);
 				
 				rs = stmt.executeQuery();

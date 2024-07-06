@@ -20,15 +20,21 @@
 </head>
 
 <body>
+	<% 
+	if(session.getAttribute("Admin")==null)
+	{
+		response.sendRedirect("AdminLogin.jsp");
+	}
+	%>
   <%@ include file="AdminDash.html" %>
         <div class="p-3">
             <div class="frm receptionist">
             <h2>New Receptionist</h2><br>
             <form action="" name="frm">
                 <input type="text" name="name" placeholder="Receptionist Name" required><br>
-                <input type="radio" name="gender" value="male">Male
-                <input type="radio" name="gender" value="female">Female
-                <input type="radio" name="gender" value="other">Other<br>
+                <input type="radio" name="gender" value="Male">Male
+                <input type="radio" name="gender" value="Female">Female
+                <input type="radio" name="gender" value="Other">Other<br>
                 <input type="text" name="contact" placeholder="Contact" required><br><br>
                 Create a unique username & a strong password.<br>
                 <input type="text" name="user" placeholder="User Name" required><br><br>

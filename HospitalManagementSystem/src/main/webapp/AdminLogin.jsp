@@ -20,13 +20,13 @@
 <body>
     <header>
         <div id="title">
-            <h1><b>Lotus Multi-specility Hospital</b></h1>
+            <h1><b>LOTUS HEALTH CARE</b></h1>
         </div>
     </header>
     <nav>
         <ul>
             <li>
-                <a href="HomePage.html"><b>Home</b></a>
+                <a href="HomePage.jsp"><b>Home</b></a>
             </li>
             <li>
                 <a href="AdminLogin.jsp"><b>Admin Login</b></a>
@@ -36,12 +36,6 @@
             </li>
             <li>
                 <a href="ReceptionistLogin.jsp"><b>Reception Login</b></a>
-            </li>
-            <li>
-                <a href="About.html"><b>About us</b></a>
-            </li>
-            <li>
-                <a href="Contact.html"><b>Contact us</b></a>
             </li>
         </ul>
     </nav>
@@ -64,6 +58,9 @@
     	   
     	   if(user.equals("admin") && pass.equals("12345"))
     	   {
+    		   HttpSession Session = request.getSession(true);
+   				session.setAttribute("Admin", "admin");
+   			
     	   	RequestDispatcher r = request.getRequestDispatcher("ViewDoctor.jsp");
     	   	r.forward(request, response);
     	   }

@@ -8,8 +8,20 @@
 <title>View Admitted Patients</title>
 </head>
 <body>
+	<%
+	 if(session.getAttribute("Did")==null)
+	 {
+		response.sendRedirect("DoctorLogin.jsp");
+	 }
+	 %>
 <%@ include file="DoctorDash.html" %>
 	<div class="p-3">
+	<% if(session.getAttribute("Did")==null)
+	{
+		response.sendRedirect("DoctorLogin.jsp");
+	}
+		response.setHeader("Cache-Control", "no-cache, must-revalidate");
+		%>
             <div id="view" style="margin-left:300px;">
             <h2 style="text-align:center;">ADMITTED PATIENTS LIST</h2>
             <table class="table" style="color: #430A5D;">

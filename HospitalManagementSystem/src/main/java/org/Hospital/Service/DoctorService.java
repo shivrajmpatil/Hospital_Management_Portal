@@ -73,4 +73,9 @@ public class DoctorService {
 	{
 		return Dr.getProfile(did);
 	}
+	
+	public int getDoctorsCount()
+	{
+		return Dr.getDoctorsCount();
+	}
 }

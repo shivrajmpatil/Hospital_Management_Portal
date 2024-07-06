@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <%@ page import="org.Hospital.Model.*,org.Hospital.Service.*" %>
 <!DOCTYPE html>
 <html>
@@ -12,8 +12,15 @@
 </head>
 
 <body>
+	<%
+	 if(session.getAttribute("Rid")==null)
+	 {
+		response.sendRedirect("ReceptionistLogin.jsp");
+	 }
+	 %>
    <%@ include file="ReceptionistDash.html" %>
         <div class="p-3">
+        
             <div class="frm profile">
             <% ReceptionistModel model = new ReceptionistModel();
             	ReceptionistService rs = new ReceptionistService();

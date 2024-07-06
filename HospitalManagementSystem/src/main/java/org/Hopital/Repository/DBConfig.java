@@ -1,33 +1,47 @@
 package org.Hopital.Repository;
 
-import java.sql.*;
-import org.Hospital.Helper.PathHelper;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DBConfig {
+	
+	private static DBConfig dbc = null;
+	private static Connection conn;
 
-	protected Connection conn;
-	protected PreparedStatement stmt;
-	protected ResultSet rs;
-	protected ResultSet rr;
-	
-	public DBConfig()
-	{
-		try {
-				PathHelper phelp = new PathHelper();
-				//Class.forName(PathHelper.p.getProperty("driver"));
+	private DBConfig() {
+
+			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				
-				//conn= DriverManager.getConnection(PathHelper.p.getProperty("url"),PathHelper.p.getProperty("user"),PathHelper.p.getProperty("password"));
-				
-				conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalmgt","root","2143");
-				String s = conn!=null?"Database connected":"Some problem to connect database";
-				//System.out.println(s);
-		
+
+			// local
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalmgt", "root", "2143");
+
+			// server
+				//conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/smprowor_hospitalmgt", "smprowor_shivraj","l}{XAy!vjqyT");
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		
-	catch(Exception e) {
-		System.out.println("Errror is "+e);
-		}
-	
+
 	}
+	
+	public static DBConfig getDBConfig()
+	{
+		if(dbc==null)
+		{
+			dbc = new DBConfig();
+		}
+		return dbc;
+	}
+
+	public static Connection getConnection() {
+		return conn;
+	}
+	
 }

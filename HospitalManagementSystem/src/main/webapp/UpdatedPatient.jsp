@@ -20,6 +20,12 @@
 </head>
 
 <body>
+	<%
+	 if(session.getAttribute("Did")==null)
+	 {
+		response.sendRedirect("DoctorLogin.jsp");
+	 }
+	 %>
   <%@ include file="DoctorDash.html" %>
         <div class="p-3">
             <div class="frm Patient" style="text-align:center;">
@@ -64,7 +70,7 @@
     		   
     		   model = ps.getPatientStatus(Pid); 
     	   	 %>
-    	   	 <h3>Patient Updated Succsefully.</h3>
+    	   	 <h3>Patient Updated Successfully.</h3>
     	   	 <table>
     	   	 <tr><th>P.ID :</th><td><%=model.getPid() %></td></tr>
     	   	  <tr><th>Name :</th><td><%=model.getName() %></td></tr>

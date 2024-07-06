@@ -1,3 +1,8 @@
+<% 
+    response.setHeader("Cache-Control", "no-cache, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="org.Hospital.Model.*,org.Hospital.Service.*,java.util.*" %>
@@ -8,6 +13,12 @@
 <title>View Appointed Patients</title>
 </head>
 <body>
+	<%
+	 if(session.getAttribute("Did")==null)
+	 {
+		response.sendRedirect("DoctorLogin.jsp");
+	 }
+	 %>
 <%@ include file="DoctorDash.html" %>
 	<div class="p-3">
             <div id="view" style="margin-left:250px;">

@@ -20,6 +20,12 @@
 </head>
 
 <body>
+	<%
+	 if(session.getAttribute("Admin")==null)
+	 {
+		response.sendRedirect("AdminLogin.jsp");
+	 }
+	 %>
   <%@ include file="AdminDash.html" %>
         <div class="p-3">
             <div class="frm receptionist">
@@ -35,9 +41,9 @@
             <form action="" name="frm">
             	<input type="hidden" name="Rid" value="<%=rid %>">
                 <input type="text" name="Name" value="<%=name %>" required><br>
-                <input type="radio" name="Gender" value="male" required>Male
-                <input type="radio" name="Gender" value="female" required>Female
-                <input type="radio" name="Gender" value="other" required>Other<br>
+                <input type="radio" name="Gender" value="Male" required>Male
+                <input type="radio" name="Gender" value="Female" required>Female
+                <input type="radio" name="Gender" value="Other" required>Other<br>
                 <input type="text" name="Contact" value="<%=contact %>" required><br>
                 Username:<br>
                 <input type="text" name="Username" value="<%=username %>" required><br>

@@ -20,6 +20,12 @@
 </head>
 
 <body>
+	<%
+	 if(session.getAttribute("Rid")==null)
+	 {
+		response.sendRedirect("ReceptionistLogin.jsp");
+	 }
+	 %>
   <%@ include file="ReceptionistDash.html" %>
         <div class="p-3">
             <div class="frm Patient">
