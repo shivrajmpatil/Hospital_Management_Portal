@@ -197,29 +197,36 @@ img {
 	<%
 	DoctorService ds = new DoctorService();
 	PatientService ps = new PatientService();
-
+	
+	int scount = ds.getSpecializationCount();
 	int dcount = ds.getDoctorsCount();
 	int pcount = ps.getPatientsCount();
 	int tpcount = ps.getTodayPatientCount();
 	%>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-3">
+				<div class="count col-md-12">
+				<h3 id="dailyPatientCount"><%=scount%></h3>
+				<p>Specializations</p>
+				</div>
+			</div>
+			<div class="col-md-3">
 				<div class="count col-md-12">
 				<h3 id="patientCount"><%=pcount%></h3>
 				<p>Total Patients</p>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="count col-md-12">
 				<h3 id="doctorCount"><%=dcount%></h3>
 				<p>Total Doctors</p>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="count col-md-12">
 				<h3 id="dailyPatientCount"><%=tpcount%></h3>
-				<p>Today's Patients</p>
+				<p>Today's Appointed Patients</p>
 				</div>
 			</div>
 		</div>

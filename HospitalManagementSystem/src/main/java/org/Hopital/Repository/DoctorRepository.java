@@ -141,23 +141,24 @@ public class DoctorRepository {
 		}
 	}
 
-	// ---------------------------------------------getSpecilization------------------------------------
-//	private void getSpecilization(DoctorModel model)
-//	{
-//		try {
-//			stmt = conn.prepareStatement("select Sname from Specilization where sid=?");
-//			stmt.setInt(1, model.getSid());
-//			rs= stmt.executeQuery();
-//			if(rs.next())
-//			{
-//				model.setSpecilization(rs.getString(1));
-//			}
-//		}
-//		catch(Exception ex)
-//		{
-//			System.out.println("Exception in getSpecilization ="+ex);
-//		}
-//	}
+	// ---------------------------------------------getSpecializationCount------------------------------------
+	public int getSpecializationCount()
+	{
+		try {
+			stmt = conn.prepareStatement("select count(*) from specilization");
+			rs= stmt.executeQuery();
+			if(rs.next())
+			{
+				return rs.getInt(1);
+			}
+			return 0;
+		}
+		catch(Exception ex)
+		{
+			System.out.println("Exception in getSpecilizationCount ="+ex);
+			return 0;
+		}
+	}
 
 	// ----------------------------------------------checkUserPass---------------------------------------
 	public int checkDoctor(DoctorModel model) {

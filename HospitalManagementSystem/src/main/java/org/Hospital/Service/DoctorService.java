@@ -78,4 +78,9 @@ public class DoctorService {
 	{
 		return Dr.getDoctorsCount();
 	}
+	
+	public int getSpecializationCount()
+	{
+		return Dr.getSpecializationCount();
+	}
 }
